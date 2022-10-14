@@ -3,7 +3,12 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - develop
+  pull_request:
+    branches:
+      - develop
+permissions:
+  contents: write
 jobs:
   build:
 
@@ -11,16 +16,17 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Build
       run: |
         npm install
+        npm run lint:staged
         npm run build
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master
-        BRANCH: gh-pages
+        BASE_BRANCH: develop
+        BRANCH: ci-cd
         FOLDER: build
