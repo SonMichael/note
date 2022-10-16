@@ -1,0 +1,44 @@
+
+.notes-wrapper{
+
+}
+.notes-container{
+  padding: 20px 20px 0px;
+}
+.notes-items{
+  &:nth-child(2n) {
+    margin-top: 5px;
+    background-color: orange;
+
+  }
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+.notes-body{
+  font-size: 13px;
+  font-family: ui-serif;
+
+}
+.notes-margin-0{
+  margin: 0px;
+}
+.notes-ml-10{
+  margin-left: 10px;
+}
+.notes-cl-gray {
+  color: gray;
+}
+
+.notes-ff {
+  font-family: ui-serif;
+
+}
+
+.notes-toolbar-container{
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 0px 0px;
+}
+.notes-cursor{
+  cursor: pointer;
+}
