@@ -8,11 +8,15 @@
 .notes-items{
   &:nth-child(2n) {
     margin-top: 5px;
-    background-color: orange;
 
   }
   border-radius: 5px;
   padding: 10px 20px;
+}
+.notes-container{
+  .active {
+    background-color: orange;
+  }
 }
 .notes-body{
   font-size: 13px;
