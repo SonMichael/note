@@ -2,13 +2,13 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.1
-  docker: circleci/docker@1.6.0
+  node: circleci/node@14.16.0
+  docker: circleci/docker@20.10.5
 
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: myapp
+      DOCKER_IMAGE: note
       DOCKER_TAG: latest
     executor: docker/docker
     steps:
@@ -45,7 +45,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - develop
       - deploy:
          requires:
           - build-and-push
