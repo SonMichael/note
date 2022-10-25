@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "npm run lint:staged",
     "eject": "react-scripts eject",
     "lint:staged": "lint-staged",
     "lint": "eslint \"{src,apps,libs,test}/**/*.tsx\" --fix && prettier --write \"src/**/*.tsx\"",
