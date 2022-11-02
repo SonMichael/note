@@ -11,6 +11,8 @@ jobs:
       DOCKER_IMAGE: note
       DOCKER_TAG: latest
     executor: docker/docker
+    docker:
+      - image: circleci/node:14.3.0
     steps:
       - setup_remote_docker
       - checkout
