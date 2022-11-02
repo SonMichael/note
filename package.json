@@ -2,7 +2,6 @@
   "name": "note",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/SonMichael/note.git",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
