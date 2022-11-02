@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/SonMichael/note.git/static/css/main.5c228aa4.css",
-    "main.js": "/SonMichael/note.git/static/js/main.b49ae977.js",
+    "main.js": "/SonMichael/note.git/static/js/main.5bc3766a.js",
     "index.html": "/SonMichael/note.git/index.html",
     "main.5c228aa4.css.map": "/SonMichael/note.git/static/css/main.5c228aa4.css.map",
-    "main.b49ae977.js.map": "/SonMichael/note.git/static/js/main.b49ae977.js.map"
+    "main.5bc3766a.js.map": "/SonMichael/note.git/static/js/main.5bc3766a.js.map"
   },
   "entrypoints": [
     "static/css/main.5c228aa4.css",
-    "static/js/main.b49ae977.js"
+    "static/js/main.5bc3766a.js"
   ]
 }
