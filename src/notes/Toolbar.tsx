@@ -1,10 +1,12 @@
 import React from 'react';
-import { AiFillDelete } from 'react-icons/ai';
+import { MdDeleteOutline } from 'react-icons/md';
+import { IoCreateOutline } from 'react-icons/io5';
 
 const Index = () => {
   return (
     <div className="notes-toolbar-container">
-      <AiFillDelete className="notes-cursor" />
+      <MdDeleteOutline className="notes-cursor" />
+      <IoCreateOutline className="notes-cursor" />
     </div>
   );
 };

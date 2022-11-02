@@ -11,7 +11,6 @@ import './EditorStyles.scss';
 import '@draft-js-plugins/image/lib/plugin.css';
 import createImagePlugin from '@draft-js-plugins/image';
 import Toolbar from './Toolbar';
-import { connect } from 'react-redux';
 
 const imagePlugin = createImagePlugin();
 const HEADING = 'header-one';
@@ -104,10 +103,4 @@ const SimpleImageEditor = ({}) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    editorReducer: state.editorReducer,
-  };
-}
-
-export default connect(mapStateToProps, {})(SimpleImageEditor);
+export default SimpleImageEditor;

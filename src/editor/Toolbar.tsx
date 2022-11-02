@@ -1,11 +1,11 @@
 import React from 'react';
-import { AiFillFileImage } from 'react-icons/ai';
+import { BsImage } from 'react-icons/bs';
 
 const Index = ({ onChangeImage }) => {
   return (
     <div className="editor-toolbar-container">
       <label htmlFor="file">
-        <AiFillFileImage className="editor-cursor" />
+        <BsImage className="editor-cursor" />
       </label>
       <input
         onChange={onChangeImage}

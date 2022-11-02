@@ -1,8 +1,11 @@
-import ActionTypes from './ActionTypes';
+import ActionTypes, { NoteType } from './ActionTypes';
+import { createAction } from '@reduxjs/toolkit';
 
-export function selectNote(data) {
-  return {
-    type: ActionTypes.SELECT_NOTE,
-    data,
-  };
-}
+export const selectNote = createAction(
+  ActionTypes.SELECT_NOTE,
+  (data: NoteType) => {
+    return {
+      payload: data,
+    };
+  },
+);
