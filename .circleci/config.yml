@@ -1,18 +1,14 @@
 
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.3
-  docker: circleci/docker@1.6.0
-
 jobs:
   build-and-push:
     environment:
       DOCKER_IMAGE: note
       DOCKER_TAG: latest
-    executor: docker/docker
+    docker:
+      - image: circleci/node:14.3.0
     steps:
-      - setup_remote_docker
       - checkout
       - docker/check:
           docker-username: DOCKER_USER
