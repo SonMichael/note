@@ -48,12 +48,12 @@ workflows:
           filters:
             branches:
               only:
-                - /feature.*/
+                - develop
+                - master
       - deploy:
           requires:
             - build-and-push
           filters:
             branches:
               only:
-                - develop
                 - master
