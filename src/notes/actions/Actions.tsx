@@ -9,3 +9,15 @@ export const selectNote = createAction(
     };
   },
 );
+
+export const deleteNote = createAction(ActionTypes.DELETE_NOTE, () => {
+  return {
+    payload: {},
+  };
+});
+
+export const createNote = createAction(ActionTypes.CREATE_NOTE, () => {
+  return {
+    payload: {},
+  };
+});

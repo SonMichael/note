@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from '~src/editor/Reducer';
-import notesReducer from '~src/notes/Reducer';
+import editorReducer from '~src/editor/actions/Reducer';
+import notesReducer from '~src/notes/actions/Reducer';
 
 const rootReducer = configureStore({
   reducer: {

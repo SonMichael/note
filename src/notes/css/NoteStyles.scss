@@ -46,3 +46,9 @@
 .notes-cursor{
   cursor: pointer;
 }
+
+.notes-toolbar-container{
+  .notes-delete-empty{
+    display: none;
+  }
+}

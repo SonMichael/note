@@ -1,20 +1,27 @@
 import React, { useCallback } from 'react';
-import { NoteType } from './ActionTypes';
+import { NoteType } from '../actions/ActionTypes';
 import { useDispatch } from 'react-redux';
-import { selectNote } from './Actions';
+import { selectNote } from '../actions/Actions';
+import { useSelector } from 'react-redux';
+import { RootStateType } from '~src/RootReducer';
 
 type ItemType = {
   item: NoteType;
-  currentNote: NoteType;
 };
 
-const ItemComponent = ({ item, currentNote }: ItemType) => {
+const ItemComponent = ({ item }: ItemType) => {
   const dispatch = useDispatch();
+  const currentNote = useSelector(
+    (state: RootStateType) => state.notesReducer.currentNote,
+  );
+
   const { text, created_at, title, id } = item;
+
   const onClickItem = useCallback(() => {
     dispatch(selectNote(item));
   }, [id]);
-  const clsActive = currentNote.id === id ? 'active' : '';
+
+  const clsActive = currentNote?.id === id ? 'active' : '';
   return (
     <div
       className={`notes-items notes-cursor ${clsActive}`}

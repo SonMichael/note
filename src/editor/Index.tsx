@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import {
-  EditorState,
-  AtomicBlockUtils,
-  convertToRaw,
-  RichUtils,
-} from 'draft-js';
+import { EditorState, convertToRaw, RichUtils } from 'draft-js';
 import Editor from '@draft-js-plugins/editor';
 import 'draft-js/dist/Draft.css';
-import './EditorStyles.scss';
+import './css/EditorStyles.scss';
 import '@draft-js-plugins/image/lib/plugin.css';
 import createImagePlugin from '@draft-js-plugins/image';
-import Toolbar from './Toolbar';
+import Toolbar from './components/Toolbar';
+import { useSelector } from 'react-redux';
+import { RootStateType } from '~src/RootReducer';
 
 const imagePlugin = createImagePlugin();
 const HEADING = 'header-one';
@@ -18,11 +15,15 @@ const SimpleImageEditor = ({}) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
+  const currentNote = useSelector(
+    (state: RootStateType) => state.notesReducer.currentNote,
+  );
 
-  const onChange = (editState) => {
+  const onChangeEditor = (editState: EditorState) => {
     setEditorState(forceFirstLine(editState));
   };
-  const forceFirstLine = (editState) => {
+
+  const forceFirstLine = (editState: EditorState) => {
     const currentContent = editState.getCurrentContent();
     const firstBlockKey = currentContent.getBlockMap().first().getKey();
     const currentBlockKey = editState.getSelection().getAnchorKey();
@@ -35,59 +36,16 @@ const SimpleImageEditor = ({}) => {
     return editState;
   };
 
-  const onChangeImage = (e) => {
-    getImage(e, (result) => {
-      const newEditorState = insertImage(editorState, result);
-      onChange(newEditorState);
-    });
-  };
-
-  const getImage = (e, cb) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (e.target.files.length === 0) {
-      return;
-    }
-    const file = e.target.files[0];
-    getBase64(file, (result) => {
-      cb(result);
-    });
-  };
-
-  const getBase64 = async (file, cb) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      cb(reader.result);
-    };
-    reader.onerror = (error) => {
-      return error;
-    };
-  };
-
-  const insertImage = (editState, base64) => {
-    const contentState = editState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      'image',
-      'IMMUTABLE',
-      { src: base64 },
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editState, {
-      currentContent: contentStateWithEntity,
-    });
-    return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ');
-  };
-
   return (
-    <div>
+    <div className="editor-container">
       <div>
-        <Toolbar onChangeImage={onChangeImage} />
+        <Toolbar onChangeEditor={onChangeEditor} editorState={editorState} />
       </div>
+      <label className="editor-lbl-created-at">{currentNote?.created_at}</label>
       <div>
         <Editor
           editorState={editorState}
-          onChange={onChange}
+          onChange={onChangeEditor}
           plugins={[imagePlugin]}
         />
       </div>

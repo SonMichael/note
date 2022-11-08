@@ -41,3 +41,13 @@
 .editor-toolbar-container{
   padding: 10px 0px 0px 10px;
 }
+
+.editor-container {
+  .editor-lbl-created-at{
+    font-size: 13px;
+    font-family: ui-serif;
+    color: gray;
+    display: flex;
+    justify-content: center;
+  }
+}
