@@ -15,22 +15,31 @@ const ItemComponent = ({ item }: ItemType) => {
     (state: RootStateType) => state.notesReducer.currentNote,
   );
 
-  const { text, created_at, title, id } = item;
+  const { text, created_at, title, _id, updated_at: updatedAt } = item;
 
   const onClickItem = useCallback(() => {
     dispatch(selectNote(item));
-  }, [id]);
+  }, [_id, updatedAt]);
 
-  const clsActive = currentNote?.id === id ? 'active' : '';
+  const formatStr = (str) => {
+    const maxLength = 25;
+    if (str.length > maxLength) {
+      return `${str.substring(0, maxLength)}...`;
+    }
+    return str;
+  };
+  const clsActive = currentNote?._id === _id ? 'active' : '';
   return (
     <div
       className={`notes-items notes-cursor ${clsActive}`}
       onClick={onClickItem}
     >
-      <h4 className="notes-margin-0 notes-ff">{title}</h4>
+      <h4 className="notes-margin-0 notes-ff">{formatStr(title)}</h4>
       <div className="notes-body">
         <span className="notes-margin-0">{created_at}</span>
-        <span className="notes-margin-0 notes-ml-10 notes-cl-gray">{text}</span>
+        <span className="notes-margin-0 notes-ml-10 notes-cl-gray">
+          {formatStr(text)}
+        </span>
       </div>
     </div>
   );

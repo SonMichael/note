@@ -1,0 +1,6 @@
+const config = {
+  REACT_APP_API_URL: 'REACT_APP_API_URL',
+  REACT_APP_API_VERSION: 'REACT_APP_API_VERSION',
+  REACT_APP_GMT_VN: 'REACT_APP_GMT_VN',
+};
+export default config;

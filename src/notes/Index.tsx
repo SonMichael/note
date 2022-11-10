@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/NoteStyles.scss';
 import Toolbar from './components/Toolbar';
 import ItemComponent from './components/ItemComponent';
 import { useSelector } from 'react-redux';
 import { RootStateType } from '~src/RootReducer';
+import { getNotes } from '~src/notes/actions/Actions';
+import { useDispatch } from 'react-redux';
 
 const Index = ({}) => {
+  const dispatch = useDispatch<any>();
+  useEffect(() => {
+    dispatch(getNotes());
+  }, []);
   const notes = useSelector((state: RootStateType) => state.notesReducer.notes);
 
   return (
@@ -16,7 +22,7 @@ const Index = ({}) => {
       <div className="notes-container">
         <div>
           {notes.map((item) => (
-            <ItemComponent key={item.id} item={item} />
+            <ItemComponent key={item._id} item={item} />
           ))}
         </div>
       </div>

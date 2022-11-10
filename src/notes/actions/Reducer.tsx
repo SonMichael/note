@@ -1,69 +1,37 @@
-import { selectNote, deleteNote, createNote } from './Actions';
+import {
+  selectNote,
+  deleteNote,
+  createNote,
+  updateNote,
+  getNotes,
+} from './Actions';
 import { NoteType } from './ActionTypes';
 import { createReducer } from '@reduxjs/toolkit';
 
-const initialState = {
-  currentNote: {
-    id: '1',
-    text: 'this is test',
-    title: 'this is title',
-    created_at: '2020-11-20',
-    updated_at: '2020-11-22',
-  },
-  notes: [
-    {
-      id: '1',
-      text: 'this is test',
-      title: 'this is title',
-      created_at: '2020-11-20',
-      updated_at: '2020-11-22',
-    },
-    {
-      id: '2',
-      text: 'this is test',
-      title: 'this is title',
-      created_at: '2020-11-21',
-      updated_at: '2020-11-22',
-    },
-    {
-      id: '3',
-      text: 'this is test',
-      title: 'this is title',
-      created_at: '2020-11-20',
-      updated_at: '2020-11-22',
-    },
-    {
-      id: '4',
-      text: 'this is test',
-      title: 'this is title',
-      created_at: '2020-11-20',
-      updated_at: '2020-11-22',
-    },
-    {
-      id: '5',
-      text: 'this is test',
-      title: 'this is title',
-      created_at: '2020-11-20',
-      updated_at: '2020-11-22',
-    },
-  ],
+export const NOTE_DEFAULT = {
+  text: 'Không có thêm văn bản',
+  title: 'Ghi chú mới',
+  content: {},
+};
+type InitialStateType = {
+  currentNote: NoteType;
+  notes: NoteType[];
+  error: any;
+};
+const initialState: InitialStateType = {
+  currentNote: null,
+  notes: [],
+  error: null,
 };
 
 const removeNote = (id: string, notes: NoteType[]) => {
   if (notes.length === 0) {
     return [];
   }
-  return notes.filter((item) => item.id !== id);
+  return notes.filter((item) => item._id !== id);
 };
 
-const addNote = (notes: NoteType[]) => {
-  const note = {
-    id: '6',
-    text: 'place holder',
-    title: 'place holder',
-    created_at: '2020-11-22',
-    updated_at: '2020-11-22',
-  };
+const addNote = (note: NoteType, notes: NoteType[]) => {
   const newArr = [note].concat(notes);
   return newArr;
 };
@@ -73,13 +41,37 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(selectNote, (state, action) => {
       state.currentNote = action.payload;
     })
-    .addCase(deleteNote, (state) => {
-      state.notes = removeNote(state.currentNote?.id, state.notes);
+    .addCase(deleteNote.fulfilled, (state, action) => {
+      state.notes = removeNote(action.payload._id, state.notes);
       state.currentNote = state.notes[0];
     })
-    .addCase(createNote, (state) => {
-      state.notes = addNote(state.notes);
+    .addCase(deleteNote.rejected, (state, action) => {
+      state.error = action.error;
+    })
+    .addCase(updateNote.fulfilled, (state, action) => {
+      const notes = removeNote(action.payload._id, state.notes);
+      state.notes = addNote(action.payload, notes);
+    })
+    .addCase(updateNote.rejected, (state, action) => {
+      state.error = action.error;
+    })
+    .addCase(createNote.fulfilled, (state, action) => {
+      state.notes = addNote(action.payload, state.notes);
       state.currentNote = state.notes[0];
+    })
+    .addCase(createNote.rejected, (state, action) => {
+      state.error = action.error;
+    })
+    .addCase(getNotes.pending, (state) => {
+      state.notes = [];
+    })
+    .addCase(getNotes.fulfilled, (state, action) => {
+      state.notes = action.payload;
+      state.currentNote = state.notes[0];
+    })
+    .addCase(getNotes.rejected, (state, action) => {
+      state.notes = [];
+      state.error = action.error;
     })
     .addDefaultCase((state) => state);
 });

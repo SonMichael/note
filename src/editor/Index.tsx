@@ -1,39 +1,22 @@
 import React, { useState } from 'react';
-import { EditorState, convertToRaw, RichUtils } from 'draft-js';
-import Editor from '@draft-js-plugins/editor';
-import 'draft-js/dist/Draft.css';
+import { EditorState } from 'draft-js';
+import Editor from '~src/editor/components/Index';
 import './css/EditorStyles.scss';
-import '@draft-js-plugins/image/lib/plugin.css';
-import createImagePlugin from '@draft-js-plugins/image';
 import Toolbar from './components/Toolbar';
 import { useSelector } from 'react-redux';
 import { RootStateType } from '~src/RootReducer';
 
-const imagePlugin = createImagePlugin();
-const HEADING = 'header-one';
 const SimpleImageEditor = ({}) => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
   const currentNote = useSelector(
     (state: RootStateType) => state.notesReducer.currentNote,
   );
 
-  const onChangeEditor = (editState: EditorState) => {
-    setEditorState(forceFirstLine(editState));
-  };
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty(),
+  );
 
-  const forceFirstLine = (editState: EditorState) => {
-    const currentContent = editState.getCurrentContent();
-    const firstBlockKey = currentContent.getBlockMap().first().getKey();
-    const currentBlockKey = editState.getSelection().getAnchorKey();
-    const isFirstBlock = currentBlockKey === firstBlockKey;
-    const currentBlockType = RichUtils.getCurrentBlockType(editState);
-    const isHeading = currentBlockType === HEADING;
-    if (isFirstBlock !== isHeading) {
-      return RichUtils.toggleBlockType(editState, HEADING);
-    }
-    return editState;
+  const onChangeEditor = (editState: EditorState) => {
+    setEditorState(editState);
   };
 
   return (
@@ -41,22 +24,13 @@ const SimpleImageEditor = ({}) => {
       <div>
         <Toolbar onChangeEditor={onChangeEditor} editorState={editorState} />
       </div>
-      <label className="editor-lbl-created-at">{currentNote?.created_at}</label>
-      <div>
+      {currentNote && currentNote._id && (
         <Editor
+          currentNote={currentNote}
+          onChangeEditor={onChangeEditor}
           editorState={editorState}
-          onChange={onChangeEditor}
-          plugins={[imagePlugin]}
         />
-      </div>
-
-      <pre>
-        {JSON.stringify(
-          convertToRaw(editorState.getCurrentContent()),
-          null,
-          '  ',
-        )}
-      </pre>
+      )}
     </div>
   );
 };

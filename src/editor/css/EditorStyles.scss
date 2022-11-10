@@ -17,7 +17,7 @@
   margin-bottom: 20px;
 }
 .DraftEditor-root {
-  width: 50%;
+  width: 100%;
   figure {
     margin-block-start: .5em;
     margin-block-end: .5em;
@@ -49,5 +49,8 @@
     color: gray;
     display: flex;
     justify-content: center;
+  }
+  .editor-wrap-draftjs{
+    padding: 0px 20px;
   }
 }
