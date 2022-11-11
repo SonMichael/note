@@ -1,18 +1,14 @@
-// reducers/todosReducers.js
-import ActionTypes from './ActionTypes';
+import { createReducer } from '@reduxjs/toolkit';
 
-const initialState = [
-  {
-    text: 'Use Redux',
-  },
-];
+type InitialStateType = {
+  error: any;
+};
+const initialState: InitialStateType = {
+  error: null,
+};
 
-export default function Reducer(state = initialState, action) {
-  switch (action.type) {
-    case ActionTypes.ADD_TODO:
-      return state;
+const reducer = createReducer(initialState, (builder) => {
+  builder.addDefaultCase((state) => state);
+});
 
-    default:
-      return state;
-  }
-}
+export default reducer;

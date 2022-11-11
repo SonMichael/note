@@ -2,6 +2,7 @@ import ConfigConstants from '~src/constants/config';
 import axios from 'axios';
 import Env from './env';
 import CookieHelper from './cookie';
+import CookieConstants from '~src/constants/cookie';
 
 const getPrefixApi = () => {
   const url = `${Env.getValue(
@@ -24,7 +25,7 @@ const opt = {
 const api = axios.create(opt);
 api.interceptors.request.use(
   (config) => {
-    const tokenLogin = CookieHelper.getToken();
+    const tokenLogin = CookieHelper.get(CookieConstants._NOTE);
     if (tokenLogin !== undefined && tokenLogin !== '') {
       config.headers.Authorization = 'Bearer ' + tokenLogin;
     }

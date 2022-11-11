@@ -1,25 +1,22 @@
 import React from 'react';
 import './App.scss';
-import Editor from './editor/Index';
-import Notes from './notes/Index';
 import Store from './RootReducer';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+const Routes = React.lazy(() => import('~src/routes/Index'));
 
-function App() {
+const App = () => {
   return (
     <Provider store={Store}>
       <div className="App">
         <div className="Container">
-          <div className="app-wrap-note">
-            <Notes />
-          </div>
-          <div className="app-wrap-editor">
-            <Editor />
-          </div>
+          <Router>
+            <Routes />
+          </Router>
         </div>
       </div>
     </Provider>
   );
-}
+};
 
 export default App;
