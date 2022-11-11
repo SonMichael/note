@@ -1,6 +1,9 @@
 const config = {
   LOGIN: '/login',
-  NOTES: '/notes',
+  AUTHENTICATE: {
+    PREFIX: 'users',
+    NOTES: '/notes',
+  },
   HOME: '/',
 };
 export default config;

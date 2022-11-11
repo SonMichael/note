@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
-import Editor from '~src/editor/components/Editor';
+import Editor from '~src/routes/auth/note/editor/components/Editor';
 
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
-import { updateNote } from '~src/notes/actions/Actions';
-import { NOTE_DEFAULT } from '~src/notes/actions/Reducer';
-import { NoteType } from 'src/notes/actions/ActionTypes';
+import { updateNote } from '~src/routes/auth/note/notes/actions/Actions';
+import { NOTE_DEFAULT } from '~src/routes/auth/note/notes/actions/Reducer';
+import { NoteType } from 'src/routes/auth/note/notes/actions/ActionTypes';
 
 type IndexType = {
   editorState: EditorState;

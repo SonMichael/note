@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './css/login.scss';
 import CryptoHelper from '~src/helpers/crypto';
-import RoutesConstants from '~src/constants/routes';
+import RoutesHelper from '~src/helpers/routes';
 
 const Index = ({}) => {
   const dispatch = useDispatch<any>();
@@ -22,7 +22,7 @@ const Index = ({}) => {
       alert(data.error.message);
       return;
     }
-    navigate(RoutesConstants.NOTES);
+    navigate(RoutesHelper.getNotesRoute());
   };
 
   return (

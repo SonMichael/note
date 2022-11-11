@@ -1,8 +1,11 @@
 import React from 'react';
 import { MdDeleteOutline } from 'react-icons/md';
 import { IoCreateOutline } from 'react-icons/io5';
-import { deleteNote, createNote } from '~src/notes/actions/Actions';
-import { NOTE_DEFAULT } from '~src/notes/actions/Reducer';
+import {
+  deleteNote,
+  createNote,
+} from '~src/routes/auth/note/notes/actions/Actions';
+import { NOTE_DEFAULT } from '~src/routes/auth/note/notes/actions/Reducer';
 import { RootStateType } from '~src/RootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 

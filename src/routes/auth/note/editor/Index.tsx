@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EditorState } from 'draft-js';
-import Editor from '~src/editor/components/Index';
+import Editor from '~src/routes/auth/note/editor/components/Index';
 import './css/EditorStyles.scss';
 import Toolbar from './components/Toolbar';
 import { useSelector } from 'react-redux';

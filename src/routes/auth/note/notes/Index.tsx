@@ -4,7 +4,7 @@ import Toolbar from './components/Toolbar';
 import ItemComponent from './components/ItemComponent';
 import { useSelector } from 'react-redux';
 import { RootStateType } from '~src/RootReducer';
-import { getNotes } from '~src/notes/actions/Actions';
+import { getNotes } from '~src/routes/auth/note/notes/actions/Actions';
 import { useDispatch } from 'react-redux';
 
 const Index = ({}) => {
