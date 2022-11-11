@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Login from '~src/routes/login/Index';
+import Login from '~src/routes/login/Middleware';
 import RoutesConstants from '~src/constants/routes';
-import AuthRoutes from '~src/routes/auth/Index';
+import AuthRoutes from '~src/routes/auth/Middleware';
 
 function Index() {
   return (

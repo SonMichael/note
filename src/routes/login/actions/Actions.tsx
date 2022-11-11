@@ -1,5 +1,5 @@
 import ActionTypes, { LoginType } from './ActionTypes';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import ApiHelper from '~src/helpers/api';
 import HttpHelper from '~src/helpers/http';
 import CookieHelper from '~src/helpers/cookie';
@@ -26,3 +26,10 @@ export const login = createAsyncThunk(
     return jsonData;
   },
 );
+
+export const logout = createAction(ActionTypes.LOGOUT, () => {
+  CookieHelper.remove(CookieConstants._NOTE);
+  return {
+    payload: {},
+  };
+});

@@ -1,12 +1,19 @@
 import React from 'react';
 import { BsImage } from 'react-icons/bs';
 import { EditorState, AtomicBlockUtils } from 'draft-js';
+import { logout } from '~src/routes/login/actions/Actions';
+import RoutesHelper from '~src/helpers/routes';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 type IndexType = {
   onChangeEditor: (editState: EditorState) => void;
   editorState: EditorState;
 };
 const Index = ({ editorState, onChangeEditor }: IndexType) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onChangeImage = (e) => {
     getImage(e, (result) => {
       const newEditorState = insertImage(editorState, result);
@@ -51,17 +58,27 @@ const Index = ({ editorState, onChangeEditor }: IndexType) => {
     return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ');
   };
 
+  const onClickLogout = () => {
+    dispatch(logout());
+    navigate(RoutesHelper.getLoginRoute());
+  };
+
   return (
     <div className="editor-toolbar-container">
-      <label htmlFor="file">
-        <BsImage className="editor-cursor" />
-      </label>
-      <input
-        onChange={onChangeImage}
-        type="file"
-        id="file"
-        style={{ display: 'none' }}
-      />
+      <div>
+        <label htmlFor="file">
+          <BsImage className="editor-cursor" />
+        </label>
+        <input
+          onChange={onChangeImage}
+          type="file"
+          id="file"
+          style={{ display: 'none' }}
+        />
+      </div>
+      <button onClick={onClickLogout} className="btn-logout">
+        Logout
+      </button>
     </div>
   );
 };

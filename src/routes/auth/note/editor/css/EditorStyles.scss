@@ -30,16 +30,8 @@
   }
 }
 
-.editor-toolbar-container{
-  
-}
-
 .editor-cursor{
   cursor: pointer;
-}
-
-.editor-toolbar-container{
-  padding: 10px 0px 0px 10px;
 }
 
 .editor-container {
@@ -52,5 +44,15 @@
   }
   .editor-wrap-draftjs{
     padding: 0px 20px;
+  }
+
+  .editor-toolbar-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10px;
+
+    .btn-logout{
+
+    }
   }
 }
