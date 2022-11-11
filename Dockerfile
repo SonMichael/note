@@ -1,14 +1,15 @@
-FROM node:13.12.0-alpine AS myapp
+FROM node:13.12.0-alpine AS builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
-RUN npm install && npm install react-scripts@3.4.1 -g --silent 
+RUN npm ci && npm install react-scripts@3.4.1 -g --silent 
 
-COPY . ./
+COPY . .
 
-RUN npm run build
+RUN npm run postinstall && npm run build
 
 FROM nginx:latest
-COPY --from=myapp /usr/src/app/build /usr/share/nginx/html
+
+COPY --from=builder /app/build /usr/share/nginx/html
