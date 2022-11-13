@@ -8,7 +8,12 @@ const getLoginRoute = () => {
   return `${RoutesConstants.LOGIN}`;
 };
 
+const getRegisterRoute = () => {
+  return `${RoutesConstants.REGISTER}`;
+};
+
 export default {
   getNotesRoute,
   getLoginRoute,
+  getRegisterRoute,
 };
