@@ -1,0 +1,20 @@
+#root{
+  background-color: #cecece;;
+}
+
+.App {
+  width: 100%;
+  max-width: 820px;
+  min-height: 100vh;
+  margin: auto;
+  display: block;
+  
+}
+
+.Container {
+  border: 1px solid gray;
+  display: flex;
+  border-radius: 5px;
+  background-color: white;
+  min-height: 100vh;
+}

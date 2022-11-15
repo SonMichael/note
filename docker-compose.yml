@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  note:
+    image: lehuuson/note:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    networks:
+      - note-backend-network
+    volumes:
+      - ./config/note.conf:/etc/nginx/conf.d/default.conf
+networks:
+  note-backend-network:
+    driver: bridge
